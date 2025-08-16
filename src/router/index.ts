@@ -26,6 +26,7 @@ const router = createRouter({
       path: '/todo/:id',
       name: 'TodoDetail',
       component: () => import('@/views/TodoDetail.vue'),
+      props: true,
     },
     {
       path: '/:pathMatch(.*)*',

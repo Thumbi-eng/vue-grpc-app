@@ -1,7 +1,14 @@
+<script setup lang="ts">
+import { useTodoStore } from '@/stores/todo'
+
+const todoStore = useTodoStore()
+</script>
+
 <template>
-  <v-container class="text-center py-10" width="600" max-width="100%">
-    <h1 class="text-h4 mb-4"> About This App</h1>
-    <p>This app was built with Vue 3, TypeScript, and Vuetify.</p>
-    <p>We’ll keep extending it as we progress 🚀</p>
-  </v-container>
+  <div class="p-4">
+    <h1 class="text-2xl font-bold mb-4">About</h1>
+    <p>
+      You currently have <b>{{ todoStore.todos.length }}</b> todos.
+    </p>
+  </div>
 </template>

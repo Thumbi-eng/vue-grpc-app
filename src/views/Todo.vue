@@ -22,9 +22,9 @@
 
         <!-- Todo list -->
         <v-list>
-          <v-list-item v-for="(todo, index) in todos" :key="index" class="d-flex align-center">
-            <v-checkbox v-model="todo.done" hide-details class="mr-3" />
-            <v-list-item-title :class="{ 'text-decoration-line-through text-grey': todo.done }">
+          <v-list-item v-for="(todo, index) in todoStore.todos" :key="index" class="d-flex align-center">
+            <v-checkbox v-model="todo.completed" hide-details class="mr-3" />
+            <v-list-item-title :class="{ 'text-decoration-line-through text-grey': todo.completed }">
               {{ todo.text }}
             </v-list-item-title>
 
@@ -39,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import { useTodoStore } from '@/stores/todo';
 import { ref } from 'vue'
 
 interface Todo {
@@ -47,16 +48,17 @@ interface Todo {
 }
 
 const newTodo = ref('')
-const todos = ref<Todo[]>([])
+
+const todoStore = useTodoStore();
 
 function addTodo() {
-  if (newTodo.value.trim()) {
-    todos.value.push({ text: newTodo.value, done: false })
-    newTodo.value = ''
+  if (newTodo.value.trim() !== "") {
+    todoStore.addTodo(newTodo.value);
+    newTodo.value = "";
   }
 }
 
 function deleteTodo(index: number) {
-  todos.value.splice(index, 1)
+    todoStore.removeTodo(index);
 }
 </script>
