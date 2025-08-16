@@ -17,6 +17,7 @@ import * as directives from 'vuetify/directives'
 
 import '@mdi/font/css/materialdesignicons.css'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
+import { useTodoStore } from './stores/todo'
 
 // Vuetify instance
 const vuetify = createVuetify({
@@ -34,5 +35,14 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+
+// --- persistence setup ---
+const todoStore = useTodoStore();
+todoStore.loadTodos();
+
+// Subscribe to store changes
+todoStore.$subscribe((mutation, state) => {
+  localStorage.setItem("todos", JSON.stringify(state.todos));
+});
 app.use(vuetify)
 app.mount('#app')

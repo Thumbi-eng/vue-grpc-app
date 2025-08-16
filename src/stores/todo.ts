@@ -27,5 +27,12 @@ export const useTodoStore = defineStore('todo', {
     removeTodo(id: number) {
       this.todos = this.todos.filter((t) => t.id !== id)
     },
+    loadTodos(){
+        const data = localStorage.getItem('todos')
+        if (data) {
+          this.todos = JSON.parse(data)
+          
+        }
+    }
   },
 })
