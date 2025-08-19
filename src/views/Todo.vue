@@ -21,8 +21,8 @@
         </v-row>
 
         <!-- Todo list -->
-        <v-list>
-          <v-list-item v-for="(todo, index) in todoStore.todos" :key="index" class="d-flex align-center">
+        <v-list class="mt-4" two-line>
+          <v-list-item v-for="(todo, index) in todoStore.todos" :key="index" class="d-flex align-center mb-2">
             <v-checkbox v-model="todo.completed" hide-details class="mr-3" />
             <v-list-item-title :class="{ 'text-decoration-line-through text-grey': todo.completed }">
               {{ todo.text }}
