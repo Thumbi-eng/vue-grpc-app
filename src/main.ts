@@ -6,20 +6,18 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-// the vuetify ImportsNotUsedAsValues
+// Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
-// the material design icons
-
-
+// Icons
 import '@mdi/font/css/materialdesignicons.css'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
+
 import { useTodoStore } from './stores/todo'
 
-// Vuetify instance
 const vuetify = createVuetify({
   components,
   directives,
@@ -30,19 +28,21 @@ const vuetify = createVuetify({
   },
 })
 
-
 const app = createApp(App)
 
-app.use(createPinia())
+// ✅ create a pinia instance
+const pinia = createPinia()
+app.use(pinia)
 app.use(router)
-
-// --- persistence setup ---
-const todoStore = useTodoStore();
-todoStore.loadTodos();
-
-// Subscribe to store changes
-todoStore.$subscribe((mutation, state) => {
-  localStorage.setItem("todos", JSON.stringify(state.todos));
-});
 app.use(vuetify)
+
+// ✅ only now it’s safe to use your store
+const todoStore = useTodoStore(pinia)
+todoStore.loadTodos()
+
+// persistence
+todoStore.$subscribe((mutation, state) => {
+  localStorage.setItem('todos', JSON.stringify(state.todos))
+})
+
 app.mount('#app')

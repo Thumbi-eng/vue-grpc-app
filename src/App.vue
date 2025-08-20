@@ -1,22 +1,16 @@
 <template>
-  <v-app>
-    <!-- Top Navbar -->
-    <v-app-bar app color="primary" dark>
-      <v-toolbar-title>My Vue 3 App</v-toolbar-title>
-
+  <v-app class="">
+    <v-toolbar app class="" color="primary">
+      <v-toolbar-title> My todo app </v-toolbar-title>
       <v-spacer></v-spacer>
-
-      <!-- Router Links -->
-      <v-btn to="/" variant="text" class="text-white">Home</v-btn>
-      <v-btn to="/todo" variant="text" class="text-white">Todo</v-btn>
-      <v-btn to="/about" variant="text" class="text-white">About</v-btn>
-    </v-app-bar>
-
-    <!-- Routed Pages -->
+      <div>
+        <v-btn to="/">Home</v-btn>
+        <v-btn to="/about">About</v-btn>
+        <v-btn to="/todo">Todo</v-btn>
+      </div>
+    </v-toolbar>
     <v-main>
       <router-view />
     </v-main>
   </v-app>
 </template>
-
-<script setup lang="ts"></script>
